@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Leaderboard() {
+  const [leaderboard, setLeaderboard] = useState([]);
+
+  useEffect(() => {
+    fetch('https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/leaderboard/')
+      .then(response => response.json())
+      .then(data => setLeaderboard(data))
+      .catch(error => console.error('Error fetching leaderboard:', error));
+  }, []);
+
   return (
     <div className="container mt-4">
       <h1 className="display-4 text-center">Leaderboard</h1>
@@ -13,16 +22,13 @@ function Leaderboard() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>1500</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jane Smith</td>
-            <td>1400</td>
-          </tr>
+          {leaderboard.map((entry, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{entry.user}</td>
+              <td>{entry.score}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

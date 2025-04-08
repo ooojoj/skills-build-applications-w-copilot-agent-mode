@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Workouts() {
+  const [workouts, setWorkouts] = useState([]);
+
+  useEffect(() => {
+    fetch('https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/workouts/')
+      .then(response => response.json())
+      .then(data => setWorkouts(data))
+      .catch(error => console.error('Error fetching workouts:', error));
+  }, []);
+
   return (
     <div className="container mt-4">
       <h1 className="display-4 text-center">Workouts</h1>
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">Morning Yoga</h5>
-          <p className="card-text">Duration: 30 minutes</p>
-          <button className="btn btn-primary">Start</button>
+      {workouts.map(workout => (
+        <div className="card mt-3" key={workout.id}>
+          <div className="card-body">
+            <h5 className="card-title">{workout.name}</h5>
+            <p className="card-text">{workout.description}</p>
+            <button className="btn btn-primary">Start</button>
+          </div>
         </div>
-      </div>
-      <div className="card mt-3">
-        <div className="card-body">
-          <h5 className="card-title">Evening Run</h5>
-          <p className="card-text">Duration: 45 minutes</p>
-          <button className="btn btn-primary">Start</button>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Users() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch('https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/users/')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+      .catch(error => console.error('Error fetching users:', error));
+  }, []);
+
   return (
     <div className="container mt-4">
       <h1 className="display-4 text-center">Users</h1>
@@ -13,22 +22,16 @@ function Users() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John Doe</td>
-            <td>john.doe@example.com</td>
-            <td>
-              <button className="btn btn-primary btn-sm">Edit</button>
-              <button className="btn btn-danger btn-sm ms-2">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Jane Smith</td>
-            <td>jane.smith@example.com</td>
-            <td>
-              <button className="btn btn-primary btn-sm">Edit</button>
-              <button className="btn btn-danger btn-sm ms-2">Delete</button>
-            </td>
-          </tr>
+          {users.map(user => (
+            <tr key={user.id}>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>
+                <button className="btn btn-primary btn-sm">Edit</button>
+                <button className="btn btn-danger btn-sm ms-2">Delete</button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
