@@ -27,9 +27,9 @@ class WorkoutViewSet(ModelViewSet):
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        'users': '/api/users/',
-        'teams': '/api/teams/',
-        'activity': '/api/activity/',
-        'leaderboard': '/api/leaderboard/',
-        'workouts': '/api/workouts/',
+        'users': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/users/',
+        'teams': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/teams/',
+        'activity': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/activity/',
+        'leaderboard': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/leaderboard/',
+        'workouts': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/workouts/',
     })
