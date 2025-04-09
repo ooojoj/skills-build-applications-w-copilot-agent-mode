@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import User, Team, Activity, Leaderboard, Workout
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
+from django.conf import settings
+
+BASE_URL = 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev'
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
@@ -27,9 +30,9 @@ class WorkoutViewSet(ModelViewSet):
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        'users': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/users/',
-        'teams': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/teams/',
-        'activity': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/activity/',
-        'leaderboard': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/leaderboard/',
-        'workouts': 'https://super-halibut-4jvjxq4xq75c7pj9-8000.app.github.dev/api/workouts/',
+        'users': f'{BASE_URL}/api/users/',
+        'teams': f'{BASE_URL}/api/teams/',
+        'activities': f'{BASE_URL}/api/activities/',
+        'leaderboard': f'{BASE_URL}/api/leaderboard/',
+        'workouts': f'{BASE_URL}/api/workouts/',
     })
